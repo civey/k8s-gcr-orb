@@ -55,7 +55,7 @@ commands:
       - run:
           name: Build docker image
           command: |
-            docker build -t $<<parameters.gcr-domain>>/$<<parameters.google-project-id>>/<<parameters.image-name>>:$<<parameters.image-tag>> <<parameters.dockerfile-path>>
+            docker build -t $<<parameters.gcr-domain>>/$<<parameters.google-project-id>>/<<parameters.image-name>>:$<<parameters.image-tag>> -f <<parameters.dockerfile-path>> .
 
       - run:
           name: Push image to GCR
