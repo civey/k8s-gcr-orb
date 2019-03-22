@@ -55,12 +55,12 @@ commands:
       - run:
           name: Build docker image
           command: |
-            docker build -t <<parameters.gcr-domain>>/$<<parameters.google-project-id>>/<<parameters.image-name>>:<<parameters.image-tag>> <<parameters.dockerfile-path>>
+            docker build -t $<<parameters.gcr-domain>>/$<<parameters.google-project-id>>/<<parameters.image-name>>:$<<parameters.image-tag>> <<parameters.dockerfile-path>>
 
       - run:
           name: Push image to GCR
           command: |
-            docker push <<parameters.gcr-domain>>/$<<parameters.google-project-id>>/<<parameters.image-name>>:<<parameters.image-tag>>
+            docker push $<<parameters.gcr-domain>>/$<<parameters.google-project-id>>/<<parameters.image-name>>:$<<parameters.image-tag>>
 
   deploy-to-k8s:
     description: Deploy to Kubernetes
@@ -112,7 +112,7 @@ commands:
           name: Set image to trigger a deployment
           command: |
             DIGEST=$(gcloud container images list-tags $GCR_DOMAIN/$GOOGLE_PROJECT_ID/<<parameters.image-name>> \
-                       --filter=TAGS:<<parameters.image-tag>> --limit=1 --format='get(digest)')
+                       --filter=TAGS:$<<parameters.image-tag>> --limit=1 --format='get(digest)')
             kubectl -n <<parameters.namespace>> \
               set image deployments/<<parameters.deployment>> \
               <<parameters.deployment>>=$GCR_DOMAIN/$GOOGLE_PROJECT_ID/<<parameters.image-name>>@$DIGEST
