@@ -100,7 +100,7 @@ commands:
 
             [ -z "$K8S_CA" ] && echo '$K8S_CA is not set!' && exit 2
 
-            mkdir $HOME/.kube
+            mkdir -p $HOME/.kube
 
             echo -e $K8S_CA > $HOME/.kube/ca.crt
             curl -fLSs <<parameters.kubeconfig-url>> \
