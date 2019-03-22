@@ -103,7 +103,7 @@ commands:
             mkdir $HOME/.kube
 
             echo -e $K8S_CA > $HOME/.kube/ca.crt
-            curl -L -o <<parameters.kubeconfig-url>> \
+            curl -fLSs <<parameters.kubeconfig-url>> \
               | sed -e "s#<K8S_SERVER>#$K8S_SERVER#" \
                     -e "s#<K8S_TOKEN>#$K8S_TOKEN#" \
                     -e "s#<HOME>#$HOME#" \
