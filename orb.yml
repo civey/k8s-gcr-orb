@@ -62,7 +62,7 @@ commands:
           command: |
             docker push $<<parameters.gcr-domain>>/$<<parameters.google-project-id>>/<<parameters.image-name>>:$<<parameters.image-tag>>
 
-  deploy-to-k8s:
+  trigger-deploy:
     description: Deploy to Kubernetes
     parameters:
       namespace:
@@ -165,7 +165,7 @@ jobs:
       - checkout
       - build-and-push-image:
           image-name: "<<parameters.image-name>>"
-      - deploy-to-k8s:
+      - trigger-deploy:
           namespace: "<<parameters.namespace>>"
           image-name: "<<parameters.image-name>>"
           deployment: "<<parameters.deployment>>"
