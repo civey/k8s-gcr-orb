@@ -42,7 +42,7 @@ commands:
       dockerfile-path:
         description: The relative path to the Dockerfile to use when building image
         type: string
-        default: "."
+        default: "Dockerfile"
     steps:
       - gcp-cli/install
       - gcp-cli/initialize:
@@ -172,7 +172,7 @@ jobs:
       dockerfile-path:
         description: The relative path to the Dockerfile to use when building image
         type: string
-        default: "."
+        default: "Dockerfile"
       namespace:
         description: kubernetes namespace to deploy to
         type: string
