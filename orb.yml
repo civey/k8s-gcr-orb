@@ -43,6 +43,10 @@ commands:
         description: The relative path to the Dockerfile to use when building image
         type: string
         default: "Dockerfile"
+      docker-build-additional-params:
+        description: The additional parameters to the `docker build` command
+        type: string
+        default: ""
     steps:
       - gcp-cli/install
       - gcp-cli/initialize:
@@ -55,7 +59,7 @@ commands:
       - run:
           name: Build docker image
           command: |
-            docker build -t $<<parameters.gcr-domain>>/$<<parameters.google-project-id>>/<<parameters.image-name>>:$<<parameters.image-tag>> -f <<parameters.dockerfile-path>> .
+            docker build $<<parameters.docker-build-additional-params>> -t $<<parameters.gcr-domain>>/$<<parameters.google-project-id>>/<<parameters.image-name>>:$<<parameters.image-tag>> -f <<parameters.dockerfile-path>> .
       - run:
           name: Push image to GCR
           command: |
